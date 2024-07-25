@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, TextField, Button, Typography, Box } from '@mui/material';
 
-const CreateListing: React.FC = () => {
+const CreatePart: React.FC = () => {
     const [formData, setFormData] = useState({
         part_number: '',
         price: '',
@@ -40,13 +40,13 @@ const CreateListing: React.FC = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:3306/api/createlisting', data, {
+            const response = await axios.post('http://localhost:3001/api/createpart', data, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${localStorage.getItem('authToken')}`
                 }
             });
-            setMessage('Listing created successfully!');
+            setMessage('Part created successfully!');
             setFormData({
                 part_number: '',
                 price: '',
@@ -56,7 +56,7 @@ const CreateListing: React.FC = () => {
             });
         } catch (err) {
             console.error(err);
-            setMessage('Error creating listing');
+            setMessage('Error creating part');
         }
     };
 
@@ -64,7 +64,7 @@ const CreateListing: React.FC = () => {
         <Container maxWidth="sm">
             <Box display="flex" flexDirection="column" alignItems="center" mt={4}>
                 <Typography variant="h4" gutterBottom>
-                    Create Listing
+                    Create Part
                 </Typography>
                 {message && <Typography color="primary" variant="body1">{message}</Typography>}
                 <form onSubmit={handleSubmit} style={{ width: '100%' }}>
@@ -130,7 +130,7 @@ const CreateListing: React.FC = () => {
                         color="primary"
                         style={{ marginTop: '16px' }}
                     >
-                        Create Listing
+                        Create Part
                     </Button>
                 </form>
             </Box>
@@ -138,4 +138,4 @@ const CreateListing: React.FC = () => {
     );
 };
 
-export default CreateListing;
+export default CreatePart;

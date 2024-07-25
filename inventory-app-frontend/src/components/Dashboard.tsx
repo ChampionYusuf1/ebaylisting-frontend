@@ -1,49 +1,50 @@
 import React from 'react';
-import { Box, CssBaseline, AppBar, Toolbar, Typography, Drawer, Button } from '@mui/material';
-import { Outlet, useNavigate } from 'react-router-dom';
-import Sidebar from './Sidebar';
-
-const drawerWidth = 240;
+import { Outlet, Link } from 'react-router-dom';
+import { Container, AppBar, Toolbar, Typography, Button, Drawer, List, ListItem, ListItemText } from '@mui/material';
 
 const Dashboard: React.FC = () => {
-    const navigate = useNavigate();
-
     const handleLogout = () => {
         localStorage.removeItem('authToken');
-        navigate('/');
+        window.location.href = '/';
     };
 
     return (
-        <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
-            <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: 'black' }}>
+        <div style={{ display: 'flex' }}>
+            <AppBar position="fixed" style={{ zIndex: 1400 }}>
                 <Toolbar>
-                    <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
-                        Inventory Management
+                    <Typography variant="h6" style={{ flexGrow: 1 }}>
+                        Inventory
                     </Typography>
-                    <Button color="inherit" onClick={handleLogout}>
-                        Logout
-                    </Button>
+                    <Button color="inherit" onClick={handleLogout}>Logout</Button>
                 </Toolbar>
             </AppBar>
             <Drawer
                 variant="permanent"
-                sx={{
-                    width: drawerWidth,
-                    flexShrink: 0,
-                    [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box', backgroundColor: '#2b2d42' },
-                }}
+                style={{ width: 240, flexShrink: 0 }}
+                PaperProps={{ style: { width: 240 } }}
             >
                 <Toolbar />
-                <Box sx={{ overflow: 'auto' }}>
-                    <Sidebar />
-                </Box>
+                <div>
+                    <List>
+                        <ListItem button component={Link} to="create-part">
+                            <ListItemText primary="Create Part" />
+                        </ListItem>
+                        <ListItem button component={Link} to="view-parts">
+                            <ListItemText primary="View Parts" />
+                        </ListItem>
+                        <ListItem button component={Link} to="settings">
+                            <ListItemText primary="Settings" />
+                        </ListItem>
+                    </List>
+                </div>
             </Drawer>
-            <Box component="main" sx={{ flexGrow: 1, p: 3, backgroundColor: 'rgba(43, 45, 66, 0.7)', minHeight: '100vh' }}>
+            <main style={{ flexGrow: 1, padding: '16px' }}>
                 <Toolbar />
-                <Outlet />
-            </Box>
-        </Box>
+                <Container>
+                    <Outlet />
+                </Container>
+            </main>
+        </div>
     );
 };
 

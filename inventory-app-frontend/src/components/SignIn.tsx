@@ -14,12 +14,12 @@ const SignIn: React.FC = () => {
         e.preventDefault();
         setError('');
         try {
-            const response = await axios.post('http://localhost:3306/api/login', {
+            const response = await axios.post('http://localhost:3001/api/auth/login', {
                 username,
                 password,
             });
             localStorage.setItem('authToken', response.data.token);
-            navigate('/dashboard/create-listing'); // Redirect to dashboard
+            navigate('/dashboard/create-part');
         } catch (err) {
             console.error('Login error:', err);
             setError('Invalid credentials');
@@ -30,7 +30,7 @@ const SignIn: React.FC = () => {
         e.preventDefault();
         setError('');
         try {
-            const response = await axios.post('http://localhost:3306/api/users', {
+            const response = await axios.post('http://localhost:3001/api/users', {
                 username,
                 password,
             });
@@ -44,7 +44,7 @@ const SignIn: React.FC = () => {
     };
 
     return (
-        <Container maxWidth="sm" sx={{ backgroundColor: 'rgba(43, 45, 66, 0.9)', padding: 4, borderRadius: 2 }}>
+        <Container maxWidth="sm">
             <Box display="flex" flexDirection="column" alignItems="center" mt={8}>
                 <Typography variant="h4" gutterBottom>
                     {tab === 0 ? 'Sign In' : 'Create Account'}
