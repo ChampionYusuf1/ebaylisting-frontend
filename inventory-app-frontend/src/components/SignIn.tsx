@@ -44,7 +44,7 @@ const SignIn: React.FC = () => {
     };
 
     return (
-        <Container maxWidth="sm">
+        <Container maxWidth="sm" sx={{ backgroundColor: 'rgba(43, 45, 66, 0.9)', padding: 4, borderRadius: 2 }}>
             <Box display="flex" flexDirection="column" alignItems="center" mt={8}>
                 <Typography variant="h4" gutterBottom>
                     {tab === 0 ? 'Sign In' : 'Create Account'}

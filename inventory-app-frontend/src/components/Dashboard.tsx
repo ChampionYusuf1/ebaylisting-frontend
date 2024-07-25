@@ -16,7 +16,7 @@ const Dashboard: React.FC = () => {
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
-            <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+            <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: 'black' }}>
                 <Toolbar>
                     <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
                         Inventory Management
@@ -31,7 +31,7 @@ const Dashboard: React.FC = () => {
                 sx={{
                     width: drawerWidth,
                     flexShrink: 0,
-                    [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
+                    [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box', backgroundColor: '#2b2d42' },
                 }}
             >
                 <Toolbar />
@@ -39,7 +39,7 @@ const Dashboard: React.FC = () => {
                     <Sidebar />
                 </Box>
             </Drawer>
-            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+            <Box component="main" sx={{ flexGrow: 1, p: 3, backgroundColor: 'rgba(43, 45, 66, 0.7)', minHeight: '100vh' }}>
                 <Toolbar />
                 <Outlet />
             </Box>
